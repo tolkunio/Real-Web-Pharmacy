@@ -1,0 +1,21 @@
+﻿@model  PagingList<Medicament>
+<h2>Лекарственные средства</h2>
+<p>
+    <a asp-action="Create">Добавить новую</a>
+</p>
+<form method="get" class="form-inline">
+    <input name="filter" class=" form-control" placeholder="Введите название для поиска" value="@Model.RouteValue["Filter"]" />
+    <button type="submit" class="btn btn-info">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Поиск
+    </button>
+</form>
+<br />
+<div class="col-sm-10">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("MedicamentSummary", item)
+    }
+    <nav aria-label="Suppliers navigation example">
+        @await Component.InvokeAsync("Pager", new { pagingList = Model })
+    </nav>
+</div>

@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Company>Reflection IT</Company>
+    <Authors>Fons Sonnemans</Authors>
+    <Copyright>Reflection IT</Copyright>
+    <AssemblyTitle>ReflectionIT.Mvc.Paging</AssemblyTitle>
+    <VersionPrefix>1.5.0</VersionPrefix>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>ReflectionIT.Mvc.Paging</AssemblyName>
+    <PackageId>ReflectionIT.Mvc.Paging</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Title>ReflectionIT.Mvc.Paging</Title>
+    <Description>ASP.NET Core 1.1 (MVC 6) Library to support Paging (including sorting and filtering) for Entity Framework Core 1.1
+ 
+</Description>
+    <PackageLicenseUrl>https://github.com/sonnemaf/ReflectionIT.Mvc.Paging/blob/master/License.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/sonnemaf/ReflectionIT.Mvc.Paging</PackageProjectUrl>
+    <PackageTags>ASPNETCore MVC6 EntityFrameworkCore</PackageTags>
+    <PackageReleaseNotes>Improved PagingOptions</PackageReleaseNotes>
+    <Version>1.6.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views\**\*.cshtml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.1" />
+  </ItemGroup>
+
+  <Target Name="PostcompileScript" AfterTargets="Build">
+    <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
+  </Target>
+
+</Project>

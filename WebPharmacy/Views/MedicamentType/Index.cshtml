@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MedicamentTypeModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Типы лекарственных средств</h2>
+
+<p>
+    <a asp-action="Create">Добавить новую</a>
+</p>
+<table class="table table-condensed">
+    <thead>
+        <tr class="active">
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" onclick="return accept()" asp-route-id="@item.Id" class="btn btn-xs btn-danger">Delete</a>        
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

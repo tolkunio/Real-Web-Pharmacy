@@ -1,0 +1,31 @@
+﻿@model Medicament
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>Детали</h2>
+
+<div class="container col-md-9">
+    <h4>Лекарственные средства</h4>
+            <div class="col-md-7">
+           <img width="300" height="150" src="~/uploads/@Model.ImageUrl" alt="">
+                <h4 class="pull-right">@Model.Price.ToString("c")</h4>
+            </div>
+            <div class="col-md-5">
+                <h3>@Model.Name</h3>
+                <h4>@Model.Firm.Name</h4>
+                <h5>@Model.MedicamentType.Name</h5>
+                <h5>@Model.Formulation.Name</h5>
+                <h7>Срок годности:@Model.ExpirationDate.Year</h7>
+                <p>Показание к применению:</p>
+                <p><i>@Model.Description</i></p>
+                <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart"
+                   asp-route-medicamentId="@Model.MedicamentId">в корзину</a>
+            </div>
+    <hr />
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MedicamentId">Редактировать</a> |
+    <a asp-action="Index">На главную</a>
+</div>

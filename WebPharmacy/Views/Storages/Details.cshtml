@@ -1,0 +1,36 @@
+﻿@model Storage
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Детали</h2>
+
+<div>
+    <h4>Склад</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Medicament.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Medicament.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Medicament.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Medicament.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.StorageId">Редактировать</a> |
+    <a asp-action="Index">На главную</a>
+</div>

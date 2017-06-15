@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewBag.Title = "Заказы";
+    Layout = "_AdminLayout";
+}
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered table-striped">
+        <tr><th>Фамилия</th><th>Имя</th><th>Контактный номер</th><th colspan="2">Данные</th><th></th></tr>
+        @foreach (Order o in Model)
+        {
+            <tr>
+                <td>@o.LastName</td>
+                <td>@o.FirstName</td>
+                <td>@o.PhoneNumber</td>
+                <th>Медикамент</th>
+                <th>Количество</th>
+                <td>
+                    <form asp-action="MarkShipped" method="post">
+                        <input type="hidden" name="orderId" value="@o.OrderId" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Доставить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @foreach (CartLine line in o.Lines)
+            {
+                <tr>
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td>@line.Medicament.Name</td>
+                    <td>@line.Quantity</td>
+                    <td></td>
+                </tr>
+            }
+        }
+    </table>
+    <a asp-controller="Home" asp-action="Index">На главную</a> 
+
+}
+else
+{
+    <div class="text-center">Все заказы доставлены</div>
+}

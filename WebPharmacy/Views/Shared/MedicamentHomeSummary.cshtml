@@ -1,0 +1,31 @@
+﻿@model Medicament
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img width="320" height="150" src="~/uploads/@Model.ImageUrl" alt="">
+        <div class="caption">
+            <h4 class="pull-right">@Model.Price.ToString("c")</h4>
+            <h4>
+                <a asp-controller="Medicament" asp-action="Details" asp-route-id="@Model.MedicamentId">@Model.Name</a>
+            </h4>
+            <p>@Model.Description</p>
+        </div>
+        <div class="ratings">
+            <p class="pull-right">15 reviews</p>
+            <p>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+            </p>
+        </div>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart"
+                   asp-route-medicamentId="@Model.MedicamentId">В корзину</a>
+                <input type="hidden" asp-for="MedicamentId" />
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model Medicament
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <a href="#">
+                <<img width="700" height="300" src="~/uploads/@Model.ImageUrl" alt="">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3>@Model.Name</h3>
+            <h4>@Model.Firm.Name</h4>
+            <h5>@Model.MedicamentType.Name</h5>
+            <h6>@Model.Price.ToString("c")</h6>
+            <p>@Model.Description</p>
+            <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart"
+               asp-route-medicamentId="@Model.MedicamentId">Add to cart</a>
+        </div>
+    </div>
+</div>

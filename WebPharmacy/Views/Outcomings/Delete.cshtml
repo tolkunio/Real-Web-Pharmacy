@@ -1,0 +1,47 @@
+﻿@model WebPharmacy.Models.Outcoming
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Удаление</h2>
+
+<h3>Вы уверены что хотите удалить товар?</h3>
+<div>
+    <h4>Список проданных товаров</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="Id" />
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OutcomedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OutcomedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Medicament)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Medicament.Description)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            <a asp-action="Index">На главную</a>
+        </div>
+    </form>
+</div>

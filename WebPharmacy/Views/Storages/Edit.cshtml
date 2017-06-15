@@ -1,0 +1,43 @@
+﻿@model Storage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Редактирование</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Склад медикаментов</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="StorageId" />
+        <div class="form-group">
+            <label asp-for="MedicamentId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="MedicamentId" class="form-control" asp-items="ViewBag.MedicamentId"></select>
+                <span asp-validation-for="MedicamentId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Count" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Count" class="form-control" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">На главную</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

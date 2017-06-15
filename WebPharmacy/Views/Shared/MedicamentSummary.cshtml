@@ -1,0 +1,25 @@
+﻿@model Medicament
+    <div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img width="320" height="150" src="~/uploads/@Model.ImageUrl" alt="">
+        <div class="caption">
+            <h4 class="pull-right">@Model.Price.ToString("c")</h4>
+            <h4>
+                <a asp-controller="Medicament" asp-action="Details" asp-route-id="@Model.MedicamentId">@Model.Name</a>
+            </h4>
+            <p>@Model.Description</p>
+        </div>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart"
+                   asp-route-medicamentId="@Model.MedicamentId">В корзину</a>
+                <hr/>
+                <input type="hidden" asp-for="MedicamentId" />
+                <input type="hidden" name="returnUrl"
+                       value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <a asp-action="Edit" asp-route-id="@Model.MedicamentId">Редактировать</a> |
+                <a asp-action="Delete" onclick="return accept()" asp-route-id="@Model.MedicamentId" class="btn btn-xs btn-danger">Удалить</a>
+            </p>
+        </div>
+    </div>
+</div>

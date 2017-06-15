@@ -1,0 +1,35 @@
+﻿@model StorageModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Удаление</h2>
+
+<h3>Вы уверены что хотите удалить ?</h3>
+<div>
+    <h4>Склад лекарственных средств</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="StorageId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Medicament)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Medicament.Description)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">На Главную</a>
+        </div>
+    </form>
+</div>

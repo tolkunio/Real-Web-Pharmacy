@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Storage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Склад медикаментов </h2>
+
+<p>
+    <a asp-action="Create">Добавить новый медикамент на склад</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Medicament.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medicament.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StorageId">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.StorageId">Подробности</a> |
+                <a asp-action="Delete" asp-route-id="@item.StorageId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
