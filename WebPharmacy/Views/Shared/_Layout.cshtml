@@ -3,12 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]Web Pharmacy</title>
+    <title>@ViewData["Title"]Web Аптека</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/shop-homepage.css" />
     </environment>
     <environment names="Staging,Production">
@@ -45,10 +44,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Клиентская часть</li>
-                    <li class="active"><a asp-controller="Medicament" asp-action="Index">Лекарственные средства</a></li>
-                    <li class="nav-header">Администраторская часть</li>
+                
+                <ul class="nav nav-list fa-border">
+                   
+                    <li>@await Html.PartialAsync("Anticids")</li>
                     <li class="active"><a asp-controller="MedicamentType" asp-action="Index">Типы лекарственных средств</a></li>
                     <li class="active"><a asp-controller="Firms" asp-action="Index">Производители</a></li>
                     <li class="active"><a asp-controller="Formulation" asp-action="Index">Форма выпуска лекарственных средств</a></li>
@@ -58,11 +57,12 @@
                     <li class="active"><a asp-controller="Incomings" asp-action="Index">Поступление товара</a></li>
                     <li class="active"><a asp-controller="Outcomings" asp-action="Index">Продажа товара</a></li>
                 </ul>
+                        
             </div>
-            <div class="col-md-9">
-                @RenderBody()
+                <div class="col-md-9 ">
+                    @RenderBody()
+                </div>
             </div>
-        </div>
         <hr />
         <footer>
             <p>&copy; 2017 - Web Аптека</p>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebPharmacy.Data;
 using WebPharmacy.ViewModels;
 using WebPharmacy.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebPharmacy.Controllers
 {
@@ -21,6 +22,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Firms
+        [Authorize]
         public  IActionResult Index()
         {
             return View( _context.Firm.Select(x=>new FirmModel
@@ -31,6 +33,7 @@ namespace WebPharmacy.Controllers
             }));
         }
         // GET: Firms/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View(new FirmModel { });
@@ -65,6 +68,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Firms/Edit/5
+        [Authorize]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -109,7 +113,7 @@ namespace WebPharmacy.Controllers
             }
             return View(model);
         }
-
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             var model = _context.Firm.FirstOrDefault(x => x.Id == id);

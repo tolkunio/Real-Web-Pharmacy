@@ -57,6 +57,7 @@ namespace WebPharmacy
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddPaging();
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IMedicamentRepository, MedicamentRepository>();
             services.AddSession();
             services.AddMemoryCache();
             services.AddMvc();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebPharmacy.Data;
 using WebPharmacy.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebPharmacy.Controllers
 {
@@ -55,8 +56,10 @@ namespace WebPharmacy.Controllers
             cart.Clear();
             return View();
         }
+        [Authorize]
         public ViewResult List() =>View(_orderRepository.Orders.Where(o => !o.Shipped));
         [HttpPost]
+        [Authorize] 
         public IActionResult MarkShipped(int orderID)
         {
             Order order = _orderRepository.Orders

@@ -8,6 +8,7 @@ using WebPharmacy.Data;
 using WebPharmacy.ViewModels;
 using WebPharmacy.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebPharmacy.Controllers
 {
@@ -18,6 +19,7 @@ namespace WebPharmacy.Controllers
         {
             _context = context;
         }
+        [Authorize]
         public IActionResult Index()
         {
             var medicaments = from item in _context.MedicamentType
@@ -29,7 +31,7 @@ namespace WebPharmacy.Controllers
                               };
             return View(medicaments);
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             return View(new MedicamentTypeModel { });
@@ -58,6 +60,7 @@ namespace WebPharmacy.Controllers
             }
             return View(model);
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -99,6 +102,7 @@ namespace WebPharmacy.Controllers
             }
             return View(model);
         }
+        [Authorize]
         public IActionResult Delete(int Id)
         {
             var model = _context.MedicamentType.FirstOrDefault(x => x.Id == Id);

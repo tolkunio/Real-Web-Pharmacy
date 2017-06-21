@@ -9,11 +9,11 @@ using WebPharmacy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data.SqlClient;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Net.Http.Headers;
 using WebPharmacy.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebPharmacy.Controllers
 {
@@ -22,65 +22,70 @@ namespace WebPharmacy.Controllers
         private readonly IHostingEnvironment _enviroment;
         private ApplicationDbContext context;
         public int pageSize = 6;
-        public MedicamentController(ApplicationDbContext context,IHostingEnvironment enviroment)
+
+        public MedicamentController(ApplicationDbContext context, IHostingEnvironment enviroment)
         {
             this.context = context;
             _enviroment = enviroment;
         }
         // GET: /<controller>/
-        public async Task<IActionResult> Index(string filter,int page = 1, string sortExpression = "Name")
+        public async Task<IActionResult> Index(string filter, int page = 1, string sortExpression = "Name")
         {
-           // IEnumerable<Medicament> medicaments;
+            // IEnumerable<Medicament> medicaments;
             var qry = context.Medicament
                 .AsNoTracking().
                 Include(p => p.MedicamentType)
                 .Include(p => p.Formulation)
-                .Include(p=>p.Firm)
-                .AsQueryable(); 
-        
-            if(!string.IsNullOrWhiteSpace(filter))
+                .Include(p => p.Firm)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter))
             {
                 qry = qry.Where(p => p.Name.Contains(filter));
             }
-            var model = await PagingList<Medicament>.CreateAsync(qry,pageSize,page,sortExpression,"Name");
+            var model = await PagingList<Medicament>.CreateAsync(qry, pageSize, page, sortExpression, "Name");
             model.RouteValue = new RouteValueDictionary
             {
                  { "filter", filter}
             };
             return View(model);
         }
+        public IActionResult List() => View("List");
+        public IActionResult InformList() => View("InformList");
+
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
             ViewBag.Firms = new SelectList(context.Firm, "Id", "Name");
-            ViewBag.MedicamentTypes = new SelectList(context.MedicamentType,"Id","Name");
+            ViewBag.MedicamentTypes = new SelectList(context.MedicamentType, "Id", "Name");
             ViewBag.Formulations = new SelectList(context.Formulation, "Id", "Name");
             return View(new MedicamentModel { });
         }
         [HttpPost]
         public IActionResult Create(MedicamentModel model)
         {
-           
-            if(ModelState.IsValid)
+
+            if (ModelState.IsValid)
             {
                 DownloadImage(model);
                 context.Medicament.Add(new Medicament
-                {  
+                {
                     Name = model.Name,
                     Description = model.Description,
                     Price = model.Price,
-                    ExpirationDate=model.ExpirationDate,
+                    ExpirationDate = model.ExpirationDate,
                     FirmId = model.FirmId,
                     FormulationId = model.FormulationId,
                     MedicamentTypeId = model.MedicamentTypeId,
-                    ImageUrl=model.ImageUrl
-      
+                    ImageUrl = model.ImageUrl
+
                 });
                 try
                 {
                     context.SaveChanges();
                 }
-                catch(DbUpdateException)
+                catch (DbUpdateException)
                 {
                     ModelState.AddModelError(string.Empty, "Ошибка при внесении в бд.");
                     ViewBag.Firms = new SelectList(context.Firm, "Id", "Name");
@@ -92,11 +97,12 @@ namespace WebPharmacy.Controllers
             }
             return View(model);
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var model = context.Medicament.FirstOrDefault(x => x.MedicamentId == id);
-            if(model==null)
+            if (model == null)
             {
                 return NotFound();
             }
@@ -108,7 +114,7 @@ namespace WebPharmacy.Controllers
                 Name = model.Name,
                 Description = model.Description,
                 Price = model.Price,
-                ExpirationDate=model.ExpirationDate,
+                ExpirationDate = model.ExpirationDate,
                 FirmId = model.FirmId,
                 FormulationId = model.FormulationId,
                 MedicamentTypeId = model.MedicamentTypeId,
@@ -123,7 +129,7 @@ namespace WebPharmacy.Controllers
             {
                 DownloadImage(medicament);
                 Medicament med = context.Medicament.FirstOrDefault(x => x.MedicamentId == id);
-                if(med==null)
+                if (med == null)
                 {
                     return NotFound();
                 }
@@ -152,6 +158,7 @@ namespace WebPharmacy.Controllers
             }
             return View(medicament);
         }
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             var model = context.Medicament.FirstOrDefault(x => x.MedicamentId == id);
@@ -163,9 +170,9 @@ namespace WebPharmacy.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Details(int ?id)
+        public IActionResult Details(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -178,9 +185,9 @@ namespace WebPharmacy.Controllers
             return View(medicament);
         }
 
-        public  void DownloadImage(MedicamentModel model)
+        public void DownloadImage(MedicamentModel model)
         {
-            
+
             var files = HttpContext.Request.Form.Files;
             foreach (var image in files)
             {
@@ -203,5 +210,5 @@ namespace WebPharmacy.Controllers
             }
         }
     }
-           
+
 }

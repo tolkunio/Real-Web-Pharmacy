@@ -20,9 +20,14 @@
     <Content Include="wwwroot\bootstrap.css" />
     <Content Include="wwwroot\bootstrap.min.css" />
     <Content Include="wwwroot\css\1-col-portfolio.css" />
+    <Content Include="wwwroot\css\blog-post.css" />
     <Content Include="wwwroot\css\bootstrap.css" />
     <Content Include="wwwroot\css\bootstrap.min.css" />
     <Content Include="wwwroot\css\shop-homepage.css" />
+    <Content Include="wwwroot\images\imagepost.jpg" />
+    <Content Include="wwwroot\images\medicaments\meds.jpg" />
+    <Content Include="wwwroot\images\meds.jpg" />
+    <Content Include="wwwroot\images\mini_imagepost.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -54,7 +59,6 @@
   <ItemGroup>
     <Folder Include="Views\Formulation\" />
     <Folder Include="Views\MedicamentType\" />
-    <Folder Include="wwwroot\images\medicaments\" />
   </ItemGroup>
 
 </Project>

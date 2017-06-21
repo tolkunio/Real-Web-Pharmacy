@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebPharmacy.Data;
 using WebPharmacy.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebPharmacy.Controllers
 {
@@ -20,6 +21,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Storages1
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Storage.Include(s => s.Medicament);
@@ -27,6 +29,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Storages1/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +49,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Storages1/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["MedicamentId"] = new SelectList(_context.Medicament, "MedicamentId", "Name");
@@ -66,6 +70,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Storages1/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,6 +124,7 @@ namespace WebPharmacy.Controllers
         }
 
         // GET: Storages1/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

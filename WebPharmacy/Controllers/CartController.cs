@@ -7,6 +7,7 @@ using WebPharmacy.Data;
 using WebPharmacy.Models;
 using WebPharmacy.Infrastructure;
 using WebPharmacy.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,6 +23,7 @@ namespace WebPharmacy.Controllers
             _context = context;
             cart = _cart;
         }
+        [Authorize]
         public ViewResult Index(string returnUrl)
         {
             return View(new CartIndexViewModel
@@ -30,6 +32,7 @@ namespace WebPharmacy.Controllers
                 ReturnUrl = returnUrl
             });
         }
+        [Authorize]
         public RedirectToActionResult AddToCart(int medicamentId, string returnUrl)
         {
             Medicament medicament = _context.Medicament
@@ -40,6 +43,7 @@ namespace WebPharmacy.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
+        [Authorize]
         public RedirectToActionResult RemoveFromCart(int medicamentId, string returnUrl)
         {
             Medicament product = _context.Medicament

@@ -4,18 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HomePage</title>
+    <title>Домашняя страница</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/shop-homepage.css" rel="stylesheet">
 </head>
 <body>
     @await Html.PartialAsync("Carousel")
     <h2>Актуальные сегодня:</h2>
-<div class=" row">
-    @foreach (var medicament in Model.Medicaments)
-    {
-        @Html.Partial("MedicamentHomeSummary", medicament)
-    }
-</div>
+    <div class=" row">
+        @foreach (var medicament in Model.Medicaments)
+        {
+            @Html.Partial("MedicamentHomeSummary", medicament)
+        }
+    </div>
 </body>
 </html>

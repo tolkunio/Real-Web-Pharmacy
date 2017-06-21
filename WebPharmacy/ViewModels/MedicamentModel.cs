@@ -43,7 +43,7 @@ namespace WebPharmacy.ViewModels
         [DataType(DataType.DateTime)]
         [Display(Name = "Срок годности")]
         public DateTime ExpirationDate { get; set; }
-
+        public IEnumerable<Medicament> Medicaments { get; set; }
         public virtual Firm Firm { get; set; }
         public virtual Formulation Formulation { get; set; }
         public virtual MedicamentType MedicamentType { get; set; }
